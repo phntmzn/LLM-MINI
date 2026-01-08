@@ -1,0 +1,56 @@
+
+
+# ==============================
+# LLM-MINI CONFIGURATION
+# ==============================
+
+# ------------------------------
+# Model
+# ------------------------------
+model:
+  name: gpt2                 # Hugging Face model name or local path
+  dtype: float16             # float16 | bfloat16 | float32 | null
+  trust_remote_code: false
+  use_flash_attention: false
+
+# ------------------------------
+# Tokenizer
+# ------------------------------
+tokenizer:
+  use_fast: true
+  padding_side: right        # right | left
+  truncation_side: right
+
+# ------------------------------
+# Training
+# ------------------------------
+training:
+  epochs: 3
+  batch_size: 2
+  grad_accum: 16
+  learning_rate: 3.0e-5
+  max_length: 1024
+
+  log_every: 10
+  save_every: 500            # 0 = disable intermediate checkpoints
+
+# ------------------------------
+# Data
+# ------------------------------
+data:
+  files:
+    - data/train.txt
+    - data/train.jsonl
+
+# ------------------------------
+# Output
+# ------------------------------
+output:
+  dir: ./out
+
+# ------------------------------
+# Runtime
+# ------------------------------
+runtime:
+  seed: 42
+  deterministic: false
